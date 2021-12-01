@@ -16,6 +16,7 @@ class PopoutButton(v.VuetifyTemplate):
     template_file = (__file__, "popout_button.vue")
     kernel_id = traitlets.Unicode('').tag(sync=True)
     target_model_id = traitlets.Unicode().tag(sync=True)
+    base_url_available = traitlets.Bool(False).tag(sync=True)
 
     def __init__(self, target, **kwargs):
         self.kernel_id = get_kernel_id()

@@ -1,7 +1,7 @@
 <template>
   <span>
     <v-btn
-        v-if="!isInPopupMode() && kernel_id"
+        v-if="!isInPopupMode() && kernel_id && base_url_available"
         @click="openWindow"
         @contextmenu.prevent="openTab"
         icon
@@ -12,6 +12,12 @@
 </template>
 <script>
 module.exports = {
+  created() {
+    this.base_url_available = !!this.getBaseUrl();
+    if (!this.base_url_available) {
+      console.info('BaseUrl not found, hiding popout button.');
+    }
+  },
   methods: {
     getBaseUrl() {
       const labConfigData = document.getElementById('jupyter-config-data');
@@ -20,6 +26,9 @@ module.exports = {
         return JSON.parse(labConfigData.textContent).baseUrl;
       }
       const bodyBaseUrl = document.body.dataset.baseUrl
+      if (!bodyBaseUrl) {
+        return;
+      }
       return bodyBaseUrl.endsWith('/voila/') ? bodyBaseUrl.slice(0, - 'voila/'.length) : bodyBaseUrl;
     },
     getUrl() {
