@@ -33,7 +33,8 @@ module.exports = {
     },
     getUrl() {
       const baseUrl = this.getBaseUrl();
-      const result = `${location.protocol}//${location.host}${baseUrl}${this.popoutPageUrl}` +
+      const host = document.body.dataset.voilaHost || `${location.protocol}//${location.host}`
+      const result = `${host}${baseUrl}${this.popoutPageUrl}` +
           `?kernelid=${this.kernel_id}&modelid=${this.target_model_id}&baseurl=${baseUrl}`
 
       return result;
