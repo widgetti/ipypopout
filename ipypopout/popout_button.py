@@ -5,7 +5,10 @@ import ipyvuetify as v
 
 
 def get_kernel_id():
-    kernel = IPython.get_ipython().kernel
+    ipython = IPython.get_ipython()
+    if not ipython:
+        return ''
+    kernel = ipython.kernel
     regex = '\\/kernel-([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\\.json$'
     connection_file = kernel.config['IPKernelApp']['connection_file']
     return re.compile(regex).search(connection_file).group(1)
