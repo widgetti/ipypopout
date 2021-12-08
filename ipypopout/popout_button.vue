@@ -1,7 +1,7 @@
 <template>
   <span>
     <v-btn
-        v-if="!isInPopupMode() && kernel_id && base_url_available"
+        v-if="!isInPopupMode() && kernel_id && getBaseUrl()"
         @click="openWindow"
         @contextmenu.prevent="openTab"
         icon
@@ -13,8 +13,7 @@
 <script>
 module.exports = {
   created() {
-    this.base_url_available = !!this.getBaseUrl();
-    if (!this.base_url_available) {
+    if (!this.getBaseUrl()) {
       console.info('BaseUrl not found, hiding popout button.');
     }
   },
