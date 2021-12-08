@@ -39,7 +39,7 @@ module.exports = {
       return result;
     },
     openWindow() {
-      window.open(this.getUrl(), this.target_model_id, 'resizable=yes');
+      window.open(this.getUrl(), this.window_name, this.window_features);
     },
     openTab() {
       window.open(this.getUrl(), '_blank');

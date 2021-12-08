@@ -20,7 +20,15 @@ class PopoutButton(v.VuetifyTemplate):
     kernel_id = traitlets.Unicode('').tag(sync=True)
     target_model_id = traitlets.Unicode().tag(sync=True)
 
+    # If a window with the same name is available it will be reused, otherwise a new window is created.
+    # See https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+    window_name = traitlets.Unicode('').tag(sync=True)
+
+    # See: https://developer.mozilla.org/en-US/docs/Web/API/Window/open#window_features
+    window_features = traitlets.Unicode('popup').tag(sync=True)
+
     def __init__(self, target, **kwargs):
         self.kernel_id = get_kernel_id()
         self.target_model_id = target._model_id
+        self.window_name = target._model_id
         super(PopoutButton, self).__init__(**kwargs)
