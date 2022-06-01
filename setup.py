@@ -48,6 +48,7 @@ setup(
     author_email='mariobuikhuizen@gmail.com',
     packages=['ipypopout'],
     install_requires=[
+        'ipywidgets>=7.7'
         'ipyvuetify>=1.7.0,<2',
         'voila>=0.2.10'
     ],
