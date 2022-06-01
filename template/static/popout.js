@@ -53,7 +53,12 @@ async function connectToJupyterKernel(kernelId, baseUrl, targetModelId) {
 
     const widgetManager = getWidgetManager(voila, kernel);
 
-    await widgetManager._build_models();
+    if (widgetManager._build_models) {
+        await widgetManager._build_models();
+    } else {
+        /* Voila >= 0.3.4 */
+        await widgetManager._loadFromKernel();
+    }
 
     const model = await widgetManager._models[targetModelId]
     const container = document.getElementById('popout-widget-container')
@@ -61,11 +66,11 @@ async function connectToJupyterKernel(kernelId, baseUrl, targetModelId) {
         container.innerText = 'Model not found';
         return;
     }
-    widgetManager.display_model(
+    const view = await widgetManager.create_view(model)
+    widgetManager.display_view(
         undefined,
-        model,
-        { el: container }
-    );
+        view,
+        { el: container });
 }
 
 const urlParams = new URLSearchParams(window.location.search);
