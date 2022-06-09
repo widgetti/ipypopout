@@ -46,6 +46,7 @@ setup(
     version='0.0.7',
     author='Mario Buikhuizen',
     author_email='mariobuikhuizen@gmail.com',
+    url='https://github.com/mariobuikhuizen/ipypopout',
     packages=['ipypopout'],
     install_requires=[
         'ipywidgets>=7.7',
