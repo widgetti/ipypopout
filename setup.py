@@ -43,7 +43,7 @@ def get_data_files(target, src):
 
 setup(
     name='ipypopout',
-    version='0.0.7',
+    version='0.0.8',
     author='Mario Buikhuizen',
     author_email='mariobuikhuizen@gmail.com',
     url='https://github.com/mariobuikhuizen/ipypopout',
