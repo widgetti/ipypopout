@@ -8,7 +8,7 @@ import ipyvuetify as v
 
 def get_kernel_id():
     ipython = IPython.get_ipython()
-    if not ipython:
+    if not ipython or not hasattr(ipython, 'kernel'):
         return ''
     kernel = ipython.kernel
     regex = r'[\\/]kernel-([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\.json$'
