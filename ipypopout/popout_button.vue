@@ -18,6 +18,17 @@ module.exports = {
       console.info('BaseUrl not found, hiding popout button.');
     }
   },
+  mounted() {
+    this.is_displayed = true;
+    if (this.open_window_on_display) {
+      this.open_window_on_display = false;
+      this.openWindow();
+    }
+    if (this.open_tab_on_display) {
+      this.open_tab_on_display = false;
+      this.openTab();
+    }
+  },
   methods: {
     getBaseUrl() {
       const labConfigData = document.getElementById('jupyter-config-data');
@@ -47,6 +58,12 @@ module.exports = {
     },
     isInPopupMode() {
       return window.location.pathname.includes(this.popoutPageUrl);
+    },
+    jupyter_open_window() {
+      this.openWindow();
+    },
+    jupyter_open_tab() {
+      this.openTab();
     }
   },
   computed: {

@@ -23,6 +23,10 @@ class PopoutButton(v.VuetifyTemplate):
     target_model_id = traitlets.Unicode().tag(sync=True)
     echo_available = traitlets.Bool(False).tag(sync=True)
 
+    is_displayed = traitlets.Bool(False).tag(sync=True)
+    open_window_on_display = traitlets.Bool(False).tag(sync=True)
+    open_tab_on_display = traitlets.Bool(False).tag(sync=True)
+
     # If a window with the same name is available it will be reused, otherwise a new window is created.
     # See https://developer.mozilla.org/en-US/docs/Web/API/Window/open
     window_name = traitlets.Unicode('').tag(sync=True)
@@ -40,3 +44,21 @@ class PopoutButton(v.VuetifyTemplate):
 
         self.echo_available = ipywidgets.widgets.widget.JUPYTER_WIDGETS_ECHO
         super(PopoutButton, self).__init__(**kwargs)
+
+    def open_window(self):
+        if self.is_displayed:
+            self.send({
+                'method': 'open_window',
+            })
+        else:
+            self.open_window_on_display = True
+            display(v.Html(tag="div", children=[self], style_="display: none"))
+
+    def open_tab(self):
+        if self.is_displayed:
+            self.send({
+                'method': 'open_tab',
+            })
+        else:
+            self.open_tab_on_display = True
+            display(v.Html(tag="div", children=[self], style_="display: none"))
