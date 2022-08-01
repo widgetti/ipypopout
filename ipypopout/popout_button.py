@@ -10,10 +10,13 @@ def get_kernel_id():
     ipython = IPython.get_ipython()
     if not ipython or not hasattr(ipython, 'kernel'):
         return ''
-    kernel = ipython.kernel
-    regex = r'[\\/]kernel-([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\.json$'
-    connection_file = kernel.config['IPKernelApp']['connection_file']
-    return re.compile(regex).search(connection_file).group(1)
+    try:
+        kernel = ipython.kernel
+        regex = r'[\\/]kernel-([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\.json$'
+        connection_file = kernel.config['IPKernelApp']['connection_file']
+        return re.compile(regex).search(connection_file).group(1)
+    except Exception:
+        return ''
 
 
 class PopoutButton(v.VuetifyTemplate):
