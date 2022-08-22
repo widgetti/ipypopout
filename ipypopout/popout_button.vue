@@ -33,14 +33,10 @@ module.exports = {
     getBaseUrl() {
       const labConfigData = document.getElementById('jupyter-config-data');
       if (labConfigData) {
-        /* lab */
+        /* lab and Voila */
         return JSON.parse(labConfigData.textContent).baseUrl;
       }
-      const bodyBaseUrl = document.body.dataset.baseUrl
-      if (!bodyBaseUrl) {
-        return;
-      }
-      return bodyBaseUrl.endsWith('/voila/') ? bodyBaseUrl.slice(0, - 'voila/'.length) : bodyBaseUrl;
+      return document.body.dataset.baseUrl
     },
     getUrl() {
       const baseUrl = this.getBaseUrl();
