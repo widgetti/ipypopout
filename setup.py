@@ -41,9 +41,15 @@ def get_data_files(target, src):
     return files
 
 
+here = os.path.dirname(__file__)
+version_ns = {}
+with open(os.path.join(here, 'ipypopout', '_version.py')) as f:
+    exec(f.read(), {}, version_ns)
+
+
 setup(
     name='ipypopout',
-    version='0.0.12',
+    version=version_ns['__version__'],
     author='Mario Buikhuizen',
     author_email='mariobuikhuizen@gmail.com',
     url='https://github.com/mariobuikhuizen/ipypopout',
