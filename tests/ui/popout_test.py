@@ -28,4 +28,11 @@ def test_popout(
     new_page.locator("text=Test ipypopout").wait_for()
     # the button should not be on the page
     new_page.locator("_vue=v-btn").wait_for(state="detached")
+    # if we do not go to a blank page, on solara, the server will not get the close beacon
+    # and the kernel will not shut down
+    new_page.goto("about:blank")
+    # wait for the kernel to shut down, if we close the page to early
+    # it seem again the server will not get the close beacon
+    # and solara's test framework fails
+    new_page.wait_for_timeout(1000)
     new_page.close()
