@@ -4,9 +4,17 @@ import IPython
 import traitlets
 import ipywidgets
 import ipyvuetify as v
+import sys
 
 
 def get_kernel_id():
+    if "solara" in sys.modules:
+        import solara
+        if solara._using_solara_server():
+            import solara.server.kernel_context
+
+            context = solara.server.kernel_context.get_current_context()
+            return context.id
     ipython = IPython.get_ipython()
     if not ipython or not hasattr(ipython, 'kernel'):
         return ''
