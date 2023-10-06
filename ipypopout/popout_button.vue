@@ -53,7 +53,8 @@ module.exports = {
       window.open(this.getUrl(), '_blank');
     },
     isInPopupMode() {
-      return window.location.pathname.includes(this.popoutPageUrl);
+      const params = new URLSearchParams(window.location.search);
+      return params.get('modelid') == this.target_model_id;
     },
     jupyter_open_window() {
       this.openWindow();
