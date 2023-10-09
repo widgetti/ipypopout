@@ -59,6 +59,11 @@ setup(
         'ipyvuetify>=1.7.0,<2',
         'voila>=0.2.10'
     ],
+    extras_require={
+        "test": [
+            "solara[pytest]",
+        ]
+    },
     data_files=get_data_files(os.path.join(*share_voila_target), os.path.join(template[0])),
     cmdclass={
         'develop': DevelopCmd,
