@@ -90,9 +90,6 @@ jobs:
         run: playwright install chromium
 
       - name: Run ui-tests
-        env:
-          # do not run solara (yet)
-          SOLARA_TEST_RUNNERS: "jupyter_lab,jupyter_notebook,voila"
         run: pytest tests/ui/ --video=retain-on-failure --solara-update-snapshots-ci -s
 
       - name: Upload Test artifacts
@@ -128,4 +125,3 @@ jobs:
           TWINE_USERNAME: __token__
           TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
         run: twine upload --skip-existing dist/*
-

@@ -65,6 +65,9 @@ module.exports = {
   },
   computed: {
     popoutPageUrl() {
+       if (window.solara && (solara.rootPath !== undefined)) {
+        return solara.rootPath;
+      }
       return 'voila/templates/ipypopout/static/popout.html'
     }
   }
