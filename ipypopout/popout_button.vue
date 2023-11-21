@@ -39,10 +39,11 @@ module.exports = {
       return document.body.dataset.baseUrl
     },
     getUrl() {
+      const isDark = this.$root.$vuetify.theme.isDark
       const baseUrl = this.getBaseUrl();
       const host = document.body.dataset.voilaHost || `${location.protocol}//${location.host}`
       const result = `${host}${baseUrl}${this.popoutPageUrl}` +
-          `?kernelid=${this.kernel_id}&modelid=${this.target_model_id}&baseurl=${baseUrl}`
+          `?kernelid=${this.kernel_id}&modelid=${this.target_model_id}&baseurl=${baseUrl}` + (isDark ? '&dark=true' : '');
 
       return result;
     },

@@ -73,12 +73,18 @@ async function connectToJupyterKernel(kernelId, baseUrl, targetModelId) {
         { el: container });
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-const kernelId = urlParams.get('kernelid');
-const modelId = urlParams.get('modelid');
-const baseUrl = urlParams.get('baseurl');
+function init() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const kernelId = urlParams.get('kernelid');
+    const modelId = urlParams.get('modelid');
+    const baseUrl = urlParams.get('baseurl');
+    const isDark = urlParams.get('dark') === 'true';
 
-addStyle(`${baseUrl}voila/static/index.css`);
-addStyle(`${baseUrl}voila/static/theme-light.css`);
+    document.body.dataset.jpThemeLight = isDark ? 'false' : 'true';
+    document.body.style.backgroundColor = isDark ? 'black' : 'white';
 
-connectToJupyterKernel(kernelId, baseUrl, modelId);
+    addStyle(`${baseUrl}voila/static/index.css`);
+    addStyle(isDark ? `${baseUrl}voila/static/theme-dark.css` : `${baseUrl}voila/static/theme-light.css`);
+
+    connectToJupyterKernel(kernelId, baseUrl, modelId);
+}
