@@ -33,7 +33,7 @@ module.exports = {
     getBaseUrl() {
       const labConfigData = document.getElementById('jupyter-config-data');
       if (labConfigData) {
-        /* lab and Voila */
+        /* lab, Voila, and Solara */
         return JSON.parse(labConfigData.textContent).baseUrl;
       }
       return document.body.dataset.baseUrl
@@ -67,7 +67,7 @@ module.exports = {
   computed: {
     popoutPageUrl() {
        if (window.solara && (solara.rootPath !== undefined)) {
-        return solara.rootPath;
+        return ""
       }
       return 'voila/templates/ipypopout/static/popout.html'
     }
