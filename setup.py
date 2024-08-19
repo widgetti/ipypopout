@@ -57,11 +57,16 @@ setup(
     install_requires=[
         'ipywidgets>=7.7',
         'ipyvuetify>=1.7.0,<2',
-        'voila>=0.2.10'
     ],
     extras_require={
         "test": [
             "solara[pytest]",
+        ],
+        "voila": [
+            "voila>=0.2.10,<0.5"
+        ],
+        "solara": [
+            "solara>=1.36"
         ]
     },
     data_files=get_data_files(os.path.join(*share_voila_target), os.path.join(template[0])),

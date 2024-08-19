@@ -85,7 +85,9 @@ https://github.com/widgetti/ipypopout/assets/1765949/430cae12-2527-404b-9861-610
 ## Installation
 
 ```
-$ pip install ipypopout
+$ pip install "ipypopout[voila]"
+or
+$ pip install "ipypopout[solara]"
 ```
 
 ## API
