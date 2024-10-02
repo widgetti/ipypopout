@@ -7,6 +7,9 @@ import ipyvuetify as v
 import sys
 
 
+DEFAULT_USE_BACKEND = os.environ.get("IPYPOPOUT_USE_BACKEND", "auto")
+
+
 def get_kernel_id():
     if "solara" in sys.modules:
         import solara
@@ -37,6 +40,8 @@ class PopoutButton(v.VuetifyTemplate):
     target_model_id = traitlets.Unicode().tag(sync=True)
     target = traitlets.Instance(ipywidgets.Widget, allow_none=True)
     echo_available = traitlets.Bool(False).tag(sync=True)
+
+    use_backend = traitlets.Enum(values=["auto", "voila", "solara"], default_value=DEFAULT_USE_BACKEND).tag(sync=True)
 
     is_displayed = traitlets.Bool(False).tag(sync=True)
     open_window_on_display = traitlets.Bool(False).tag(sync=True)
