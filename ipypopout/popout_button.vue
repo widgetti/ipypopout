@@ -13,9 +13,22 @@
 </template>
 <script>
 module.exports = {
+  data() {
+    return {solaraFound: false}
+  },
   created() {
-    if (!this.getBaseUrl()) {
+    const baseUrl = this.getBaseUrl();
+    if (!baseUrl) {
       console.info('BaseUrl not found, hiding popout button.');
+    } else {
+      const solaraReadyZUrl = `${baseUrl}solara/readyz`;
+      fetch(solaraReadyZUrl)
+        .then(response => {
+          if (response.ok) {
+            console.error('Solara found, using Solara popout page.');
+            this.solaraFound = true;
+          }
+        })
     }
   },
   mounted() {
@@ -68,7 +81,7 @@ module.exports = {
        if (window.solara && (solara.rootPath !== undefined)) {
         return solara.rootPath;
       }
-      return 'voila/templates/ipypopout/static/popout.html'
+      return this.solaraFound ? 'solara' : 'voila/templates/ipypopout/static/popout.html'
     }
   }
 }
