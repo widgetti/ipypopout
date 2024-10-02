@@ -63,10 +63,10 @@ setup(
             "solara[pytest]",
         ],
         "voila": [
-            "voila>=0.2.10,<0.5"
+            'voila>=0.2.10,<0.5'
         ],
         "solara": [
-            "solara>=1.36"
+            'solara-server>=1.40.0'
         ]
     },
     data_files=get_data_files(os.path.join(*share_voila_target), os.path.join(template[0])),

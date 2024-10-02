@@ -9,8 +9,26 @@ Works with:
 
    * Jupyter notebook
    * Jupyter lab
-   * Voila (`version<0.5`)
+   * Voila (`version<0.5` only when running standalone)
    * [Solara](https://github.com/widgetti/solara/) (`version>=1.22`)
+
+In the Jupyter notebook and Jupyter lab environments, ipypopout will use either Solara or Voila to create the popout window. The exist
+
+## Installation
+
+### To use the Solara backend
+
+```
+$ pip install "ipypopout[solara]"
+```
+
+### To use the Voila backend
+
+```
+$ pip install "ipypopout[voila]"
+```
+
+*Note: ipypopout is not compatible with Voila >= 0.5 standalone (e.g. running as `voila mynotebook.ipynb`). If you use Voila >=0.5 as a Jupyter server extension, such as when running Jupyter Lab, ipypopout can only use solara and therefore you need to `pip install ipypopout[solara]`.*
 
 ## Usage
 
@@ -82,13 +100,6 @@ Because Solara creates elements instead of widgets, we have to use the `use_effe
 https://github.com/widgetti/ipypopout/assets/1765949/430cae12-2527-404b-9861-610565ac1471
 
 
-## Installation
-
-```
-$ pip install "ipypopout[voila]"
-or
-$ pip install "ipypopout[solara]"
-```
 
 ## API
 
@@ -99,3 +110,7 @@ $ pip install "ipypopout[solara]"
      * `window_name - str`: If a window with the same name is available it will be reused, otherwise a new window is created (defaults to `target_model_id`).
         See [https://developer.mozilla.org/en-US/docs/Web/API/Window/open](https://developer.mozilla.org/en-US/docs/Web/API/Window/open) for more details.
      * `window_features - str`: See: [https://developer.mozilla.org/en-US/docs/Web/API/Window/open#window_features](https://developer.mozilla.org/en-US/docs/Web/API/Window/open#window_features)
+
+### Which backend to use
+
+Note that ipypopout will automatically detect if it can use Solara, and use it if available, otherwise it will use Voila. If you want to force the use of Voila, you can set the environment variable `IPYPOPOUT_USE_BACKEND=voila`, the other options are `auto` (the default) and `solara` (in case our auto detect fails).
