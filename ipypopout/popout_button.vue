@@ -19,10 +19,11 @@ module.exports = {
   created() {
     const baseUrl = this.getBaseUrl();
     if (!baseUrl) {
+      this.solaraDetectionPromise = Promise.resolve();
       console.info('BaseUrl not found, hiding popout button.');
     } else {
       const solaraReadyZUrl = `${baseUrl}solara/readyz`;
-      fetch(solaraReadyZUrl)
+      this.solaraDetectionPromise = fetch(solaraReadyZUrl)
         .then(response => {
           if (response.ok) {
             console.error('Solara found, using Solara popout page.');
@@ -33,14 +34,16 @@ module.exports = {
   },
   mounted() {
     this.is_displayed = true;
-    if (this.open_window_on_display) {
-      this.open_window_on_display = false;
-      this.openWindow();
-    }
-    if (this.open_tab_on_display) {
-      this.open_tab_on_display = false;
-      this.openTab();
-    }
+    this.solaraDetectionPromise.then(() => {
+      if (this.open_window_on_display) {
+        this.open_window_on_display = false;
+        this.openWindow();
+      }
+      if (this.open_tab_on_display) {
+        this.open_tab_on_display = false;
+        this.openTab();
+      }
+    });
   },
   methods: {
     getBaseUrl() {
