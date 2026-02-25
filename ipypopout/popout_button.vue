@@ -5,6 +5,7 @@
         @click="openWindow"
         @contextmenu.prevent="openTab"
         icon
+        variant="text"
         :disabled="!echo_available"
     >
       <v-icon>mdi-application-export</v-icon>
