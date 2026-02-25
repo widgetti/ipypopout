@@ -56,7 +56,7 @@ setup(
     packages=['ipypopout'],
     install_requires=[
         'ipywidgets>=7.7',
-        'ipyvuetify>=1.7.0,<2',
+        'ipyvuetify>=1.7.0',
     ],
     extras_require={
         "test": [
