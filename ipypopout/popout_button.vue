@@ -1,5 +1,5 @@
 <template>
-  <span>
+  <span style="color: inherit;">
     <v-btn
         v-if="!isInPopupMode() && kernel_id && getBaseUrl()"
         @click="openWindow"
@@ -7,8 +7,9 @@
         icon
         variant="text"
         :disabled="!echo_available"
+        style="color: inherit !important;"
     >
-      <v-icon>mdi-application-export</v-icon>
+      <v-icon style="color: inherit !important;">mdi-application-export</v-icon>
     </v-btn>
   </span>
 </template>
